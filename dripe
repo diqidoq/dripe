@@ -5,7 +5,7 @@ if [ "$EUID" -ne 0 ] ; then
  printf '
   Please make sure you start dripe with sudo or as root (required for file permissions).
   This requires dripe to be placed in or symlinked to /usr/local/bin/dripe with chmod a+x.
-  --- Drub quits now. ---\n\n'
+  --- Dripe quits now. ---\n\n'
  exit
 fi
 
