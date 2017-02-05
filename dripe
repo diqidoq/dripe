@@ -1,0 +1,23 @@
+#!/bin/bash
+
+read -p "Make sure you are in a drupal root (y/n):" YN
+if [[ "$YN" == "y" ]] ; then
+  
+  # repair file and folder permissions
+  read -p "We usually use www-data for group but which user is the owner?
+  Press <enter> to keep yourself (default), or type carefully another users machine name: " NEWUSER
+  if [ -z "${NEWUSER}" ] ; then
+    NEWUSER=$(basename ${HOME})
+  fi
+  chown -R $NEWUSER:www-data .
+  find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
+  find . -type f -exec chmod u=rw,g=r,o= '{}' \;
+  
+  # Clean Drupal root from README.txt and alike files
+  find . -type f -iname "README.*" -exec rm '{}' \;
+  find . -type f -iname "CHANGELOG.*" -exec rm '{}' \;
+  find . -type f -iname "LICENSE.*" -exec rm '{}' \;
+  
+else
+  printf "\nOk. I stop and quit.\n"
+fi
