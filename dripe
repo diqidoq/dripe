@@ -21,11 +21,14 @@ if [[ "$YN" == "y" ]] ; then
   chown -R $NEWUSER:www-data .
   find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
   find . -type f -exec chmod u=rw,g=r,o= '{}' \;
+  chmod -R ug=rwx,o= sites/default/files
+  chmod 440 sites/default/settings.php
   
   # Clean Drupal root from README.txt and alike files
   find . -type f -name "README.*" -exec rm '{}' \;
   find . -type f -name "CHANGELOG.*" -exec rm '{}' \;
   find . -type f -name "LICENSE.*" -exec rm '{}' \;
+
   
 else
   printf "\nOk. I stop and quit.\n"
