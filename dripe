@@ -14,9 +14,9 @@ if [[ "$YN" == "y" ]] ; then
   find . -type f -exec chmod u=rw,g=r,o= '{}' \;
   
   # Clean Drupal root from README.txt and alike files
-  find . -type f -iname "README.*" -exec rm '{}' \;
-  find . -type f -iname "CHANGELOG.*" -exec rm '{}' \;
-  find . -type f -iname "LICENSE.*" -exec rm '{}' \;
+  find . -type f -name "README.*" -exec rm '{}' \;
+  find . -type f -name "CHANGELOG.*" -exec rm '{}' \;
+  find . -type f -name "LICENSE.*" -exec rm '{}' \;
   
 else
   printf "\nOk. I stop and quit.\n"
