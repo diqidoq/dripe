@@ -13,10 +13,10 @@ read -p "Make sure you are in a drupal root (y/n):" YN
 if [[ "$YN" == "y" ]] ; then
   
   # repair file and folder permissions
-  read -p "We usually use www-data for group but which user is the owner?
+  read -p "We usually use www-data for group but which user is the owner?\
   Press <enter> to keep yourself (default), or type carefully another users machine name: " NEWUSER
   if [ -z "${NEWUSER}" ] ; then
-    NEWUSER=$USER
+    NEWUSER=$SUDO_USER
   fi
   chown -R $NEWUSER:www-data .
   find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
@@ -27,11 +27,13 @@ if [[ "$YN" == "y" ]] ; then
   # Clean Drupal root from README.txt and alike files
   find . -type f -name "README.*" -exec rm '{}' \;
   find . -type f -name "COPYRIGHT.*" -exec rm '{}' \;
+  find . -type f -name "INSTALL.txt" -exec rm '{}' \;
   find . -type f -name "INSTALL.*.txt" -exec rm '{}' \;
   find . -type f -name "MAINTAINER*" -exec rm '{}' \;
   find . -type f -name "UPGRADE.txt" -exec rm '{}' \;
   find . -type f -name "CHANGELOG.*" -exec rm '{}' \;
   find . -type f -name "LICENSE.*" -exec rm '{}' \;
+  find . -type f -name "*.md" -exec rm '{}' \;
   
 else
   printf "\nOk. I stop and quit.\n"
