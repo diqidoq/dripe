@@ -16,7 +16,7 @@ if [[ "$YN" == "y" ]] ; then
   read -p "We usually use www-data for group but which user is the owner?
   Press <enter> to keep yourself (default), or type carefully another users machine name: " NEWUSER
   if [ -z "${NEWUSER}" ] ; then
-    NEWUSER=$(basename ${HOME})
+    NEWUSER=$USER
   fi
   chown -R $NEWUSER:www-data .
   find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
@@ -26,9 +26,12 @@ if [[ "$YN" == "y" ]] ; then
   
   # Clean Drupal root from README.txt and alike files
   find . -type f -name "README.*" -exec rm '{}' \;
+  find . -type f -name "COPYRIGHT.*" -exec rm '{}' \;
+  find . -type f -name "INSTALL.*.txt" -exec rm '{}' \;
+  find . -type f -name "MAINTAINER*" -exec rm '{}' \;
+  find . -type f -name "UPGRADE.txt" -exec rm '{}' \;
   find . -type f -name "CHANGELOG.*" -exec rm '{}' \;
   find . -type f -name "LICENSE.*" -exec rm '{}' \;
-
   
 else
   printf "\nOk. I stop and quit.\n"
