@@ -18,7 +18,7 @@ if [[ "$YN" == "y" ]] ; then
   if [ -z "${NEWUSER}" ] ; then
     NEWUSER=$SUDO_USER
   fi
-  chown -R $NEWUSER:www-data .
+  chown ${NEWUSER}:www-data -R .
   find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
   find . -type f -exec chmod u=rw,g=r,o= '{}' \;
   chmod -R ug=rwx,o= sites/default/files
@@ -34,7 +34,7 @@ if [[ "$YN" == "y" ]] ; then
   find . -type f -name "CHANGELOG.*" -exec rm '{}' \;
   find . -type f -name "LICENSE.*" -exec rm '{}' \;
   find . -type f -name "*.md" -exec rm '{}' \;
-  
+
 else
   printf "\nOk. I stop and quit.\n"
 fi
